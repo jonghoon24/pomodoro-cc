@@ -1,0 +1,102 @@
+:root {
+  font-family: system-ui, -apple-system, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  color: #1f2328;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.app {
+  --accent: #d1453b;
+  --bg: #fdf1ef;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 48px 16px;
+  background: var(--bg);
+  transition: background 0.3s;
+}
+
+.app[data-phase='break'] {
+  --accent: #2f8a5b;
+  --bg: #eef8f2;
+}
+
+.timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mode {
+  margin: 0;
+  padding: 6px 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.time {
+  margin: 16px 0 24px;
+  font-size: clamp(64px, 20vw, 120px);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+}
+
+button {
+  min-width: 112px;
+  padding: 12px 20px;
+  border: 2px solid var(--accent);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--accent);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.memo {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.memo label {
+  font-weight: 600;
+}
+
+.memo textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #c9ccd1;
+  border-radius: 10px;
+  font: inherit;
+  resize: vertical;
+}
+
+.memo textarea:focus {
+  outline: 2px solid var(--accent);
+  border-color: transparent;
+}
