@@ -14,9 +14,11 @@ npm run dev       # Vite 개발 서버
 npm run build     # tsc -b 로 타입 검사 후 vite build → dist/
 npm run preview   # 빌드 결과 미리보기
 npm run lint      # ESLint (eslint.config.js, flat config)
+npm run test:e2e  # Playwright E2E (e2e/, 개발 서버를 5174 포트로 자동 실행)
 ```
 
-- 테스트 러너는 설정되어 있지 않다. 변경 검증은 `npm run lint`, `npm run build`(타입 검사 포함)와 브라우저 동작 확인으로 한다.
+- 변경 검증은 `npm run lint`, `npm run build`(타입 검사 포함), `npm run test:e2e`로 한다. 단위 테스트 러너는 없다. 처음 실행할 때는 `npx playwright install chromium`이 필요하다.
+- E2E 테스트는 `page.clock`으로 페이지의 `Date`·타이머를 멈춘 가짜 시계로 바꾸고 시간을 직접 흘린다. 긴 구간은 `fastForward`(사이의 타이머를 최대 한 번만 실행해 백그라운드 탭과 비슷함)로 건너뛰고, 단계 경계처럼 틱이 필요한 짧은 구간만 `runFor`를 쓴다. 수십 분을 `runFor`로 돌리면 250ms 인터벌이 수천 번 실행돼 타임아웃이 난다.
 - ESLint는 `@eslint/js`·`typescript-eslint` recommended에 `react-hooks`, `react-refresh`(Vite) 규칙을 더한 구성이다(Vite react-ts 템플릿과 동일).
 - URL에 `?fast`를 붙이면 집중 25초 / 휴식 5초로 동작한다(`getDurations`). 수동 테스트 시 사용.
 - tsconfig에 `noUnusedLocals`/`noUnusedParameters`가 켜져 있어 사용하지 않는 변수가 있으면 빌드가 실패한다.
