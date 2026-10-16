@@ -13,9 +13,11 @@ npm install
 npm run dev       # Vite 개발 서버
 npm run build     # tsc -b 로 타입 검사 후 vite build → dist/
 npm run preview   # 빌드 결과 미리보기
+npm run lint      # ESLint (eslint.config.js, flat config)
 ```
 
-- 테스트 러너와 린터는 설정되어 있지 않다. 변경 검증은 `npm run build`(타입 검사 포함)와 브라우저 동작 확인으로 한다.
+- 테스트 러너는 설정되어 있지 않다. 변경 검증은 `npm run lint`, `npm run build`(타입 검사 포함)와 브라우저 동작 확인으로 한다.
+- ESLint는 `@eslint/js`·`typescript-eslint` recommended에 `react-hooks`, `react-refresh`(Vite) 규칙을 더한 구성이다(Vite react-ts 템플릿과 동일).
 - URL에 `?fast`를 붙이면 집중 25초 / 휴식 5초로 동작한다(`getDurations`). 수동 테스트 시 사용.
 - tsconfig에 `noUnusedLocals`/`noUnusedParameters`가 켜져 있어 사용하지 않는 변수가 있으면 빌드가 실패한다.
 - `vite.config.ts`의 `base: './'`는 `dist/`를 하위 경로나 정적 호스팅에 그대로 올리기 위한 설정이므로 유지한다.
