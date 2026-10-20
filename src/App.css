@@ -100,3 +100,52 @@ button.primary {
   outline: 2px solid var(--accent);
   border-color: transparent;
 }
+
+button[aria-disabled='true'] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.field {
+  width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.field input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #c9ccd1;
+  border-radius: 10px;
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.field input:focus {
+  outline: 2px solid var(--accent);
+  border-color: transparent;
+}
+
+.field input[aria-invalid='true'] {
+  border-color: #b42318;
+}
+
+.field .error {
+  margin: 0;
+  color: #b42318;
+  font-size: 13px;
+}

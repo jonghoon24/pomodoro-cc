@@ -10,11 +10,23 @@ export interface Durations {
   breakMs: number;
 }
 
-export function getDurations(search: string): Durations {
-  const fast = new URLSearchParams(search).has('fast');
-  return fast
-    ? { focusMs: 25 * 1000, breakMs: 5 * 1000 }
-    : { focusMs: 25 * 60 * 1000, breakMs: 5 * 60 * 1000 };
+export interface Settings {
+  focusMin: number;
+  breakMin: number;
+}
+
+export const DEFAULT_SETTINGS: Settings = { focusMin: 25, breakMin: 5 };
+
+// 1~999 사이의 정수(분)만 허용한다. 앞뒤 공백과 앞자리 0은 허용한다.
+export function parseMinutes(input: string): number | null {
+  const text = input.trim();
+  if (!/^\d+$/.test(text)) return null;
+  const n = Number(text);
+  return n >= 1 && n <= 999 ? n : null;
+}
+
+export function toDurations(s: Settings): Durations {
+  return { focusMs: s.focusMin * 60 * 1000, breakMs: s.breakMin * 60 * 1000 };
 }
 
 export const IDLE: TimerState = { status: 'idle' };
