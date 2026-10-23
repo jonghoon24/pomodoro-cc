@@ -14,6 +14,7 @@ import {
 } from './timer';
 import { cancelAll, ensureAudio, scheduleChime } from './sound';
 import { loadSettings, saveSetting } from './settings';
+import TodoList from './TodoList';
 
 const APP_NAME = '포모도로 타이머';
 
@@ -39,7 +40,6 @@ function scheduleEndChimes(state: TimerState, now: number, breakMs: number) {
 export default function App() {
   const [timer, setTimer] = useState<TimerState>(IDLE);
   const [now, setNow] = useState(() => Date.now());
-  const [memo, setMemo] = useState('');
   const [settings, setSettings] = useState(loadSettings);
   const [drafts, setDrafts] = useState<Drafts>(() => ({
     focusMin: String(settings.focusMin),
@@ -196,16 +196,7 @@ export default function App() {
         )}
       </section>
 
-      <section className="memo">
-        <label htmlFor="memo">이번 집중에 할 일</label>
-        <textarea
-          id="memo"
-          value={memo}
-          onChange={(e) => setMemo(e.target.value)}
-          placeholder="이번 집중 동안 할 일을 적어 두세요"
-          rows={5}
-        />
-      </section>
+      <TodoList />
     </main>
   );
 }
